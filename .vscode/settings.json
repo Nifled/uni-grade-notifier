@@ -1,0 +1,12 @@
+{
+  "python.pythonPath": "/usr/local/bin/python3",
+  "python.linting.pylintEnabled": false,
+  "python.linting.pep8Enabled": true,
+  "python.linting.enabled": true,
+  "workbench.colorCustomizations": {
+    "titleBar.activeForeground": "#FFE873",
+    "titleBar.inactiveForeground": "#FFE873",
+    "titleBar.activeBackground": "#4B8BBE",
+    "titleBar.inactiveBackground": "#306998"
+  }
+}
