@@ -35,18 +35,20 @@ def main():
     store = pickledb.load(PICKLE_FN, True)  # Grades store
 
     with requests.Session() as s:
-        s.post(LOGIN_URL, data=form_data_login)
+    #     s.post(LOGIN_URL, data=form_data_login)
 
-        # Cycle id for grades
-        id_cycle = get_cycle(s, CYCLE_URL)
+    #     # Cycle id for grades
+    #     id_cycle = get_cycle(s, CYCLE_URL)
 
-        # Student id for grades
-        id_student = get_student_info(s, INFO_URL)
+    #     # Student id for grades
+    #     id_student = get_student_info(s, INFO_URL)
 
-        grades_res = s.post(GRADES_URL, data={
-            'idEstudiante': id_student,
-            'idCiclo': id_cycle,
-        })
+    #     grades_res = s.post(GRADES_URL, data={
+    #         'idEstudiante': id_student,
+    #         'idCiclo': id_cycle,
+    #     })
+
+        grades_res = s.get('http://demo3981406.mockable.io/grades')
 
     subjects = grades_res.json().get('data')
     print(subjects)
