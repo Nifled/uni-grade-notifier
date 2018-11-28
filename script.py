@@ -15,7 +15,7 @@ def get_student_info(session, url):
 
 def main():
     # pickedb filename
-    PICKLE_FN = 'test.p'
+    PICKLE_FN = 'grades.p'
 
     # UNISON api urls
     LOGIN_URL = 'https://buhos.uson.mx/web/apps/portalAlumnos/index.php/auth/login/entrar'
@@ -27,6 +27,9 @@ def main():
     PORTAL_USER = os.environ.get('PORTAL_USER', 'User Not Set')
     PORTAL_PW = os.environ.get('PORTAL_PW', 'Password Not Set')
     form_data_login = {'u': PORTAL_USER, 'p': PORTAL_PW}
+
+    # Data store
+    store = pickledb.load(PICKLE_FN, True)  # Grades store
 
     with requests.Session() as s:
         s.post(LOGIN_URL, data=form_data_login)
@@ -42,8 +45,6 @@ def main():
             'idCiclo': id_cycle,
         })
 
-    store = pickledb.load(PICKLE_FN, True)  # Grades store
-
     subjects = grades_res.json().get('data')
     print(subjects)
     for subject in subjects:
@@ -55,6 +56,7 @@ def main():
             old_grade = store.get(subject_id)
 
             if not subject_grade == old_grade:
+                print(f'Calificacion de {subject_name} ha sido actualizada!')
                 # Send email!
                 # ...
                 # .
@@ -63,10 +65,9 @@ def main():
                 store.set(subject_id, subject_grade)
 
         else:
-            print(f'Materia {subject_name} DOES NOT exist.')
+            print(f'Create {subject_name} store in pickledb!')
             store.set(subject_id, subject_grade)
 
-    print(store.getall())
 
 if __name__ == '__main__':
     main()
