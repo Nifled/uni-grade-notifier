@@ -1,6 +1,7 @@
 import os
 import requests
 import pickledb
+from update_email import GradeUpdateEmail
 
 
 def get_cycle(session, url):
@@ -27,6 +28,8 @@ def main():
     PORTAL_USER = os.environ.get('PORTAL_USER', 'User Not Set')
     PORTAL_PW = os.environ.get('PORTAL_PW', 'Password Not Set')
     form_data_login = {'u': PORTAL_USER, 'p': PORTAL_PW}
+
+    USER_EMAIL = os.environ.get('USER_EMAIL', 'Email Not Set')  # For emails
 
     # Data store
     store = pickledb.load(PICKLE_FN, True)  # Grades store
@@ -57,12 +60,13 @@ def main():
 
             if not subject_grade == old_grade:
                 print(f'Calificacion de {subject_name} ha sido actualizada!')
-                # Send email!
-                # ...
-                # .
-                # ...
-                # Send email!
+
+                # Save update to store
                 store.set(subject_id, subject_grade)
+
+                # Send email!
+                email = GradeUpdateEmail(USER_EMAIL)
+                email.send_update(subject_name, subject_grade)
 
         else:
             print(f'Create {subject_name} store in pickledb!')
