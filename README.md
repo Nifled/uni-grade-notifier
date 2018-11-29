@@ -33,8 +33,7 @@ Si no tienes `pipenv` o Python 3.6.x, instalalos ☺️.
 - `SENDGRID_API_KEY` = api key de sendgrid
 - `PROJECT_PATH` = ruta en donde tienes `uni-grade-notifier` (ejecuta el comando `pwd`)
 
-
-Usa mi key de SendGrid si quieres: `'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'`.
+Para el key de SendGrid, te puedes hacer una cuenta gratis y rapido [aqui](https://sendgrid.com/free/). Generas tu correo y copias el API_KEY.
 
 **4. Crea un cron job para ejecutar script cada x minutos.**
 
