@@ -6,11 +6,12 @@ export USER_EMAIL='example@mail.com'
 export PORTAL_USER='a214215385@alumnos.unison.mx'
 export PORTAL_PW='your-password'
 export SENDGRID_API_KEY='create-free-sendgrid-account-in-5-mins-for-apikey'
+PROEJCT_PATH='/home/nifled/uni-grade-notifier'
 
 
 #########   don't modify   #########
 # paths
-VENV_PY="$PWD/.venv/bin/python"
+VENV_PY="$PROEJCT_PATH/.venv/bin/python"
 SCRIPT="script.py"
 
 # command
