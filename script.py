@@ -17,6 +17,10 @@ def get_student_info(session, url):
 def main():
     # pickedb filename
     PICKLE_FN = 'grades.p'
+    FICKLE_DIR = os.environ.get('PROJECT_PATH', 'PROJECT_PATH Not Set')
+    PICKLE_PATH = f'{FICKLE_DIR}/{PICKLE_FN}'
+    # Data store
+    store = pickledb.load(PICKLE_PATH, True)  # Grades store
 
     # UNISON api urls
     LOGIN_URL = 'https://buhos.uson.mx/web/apps/portalAlumnos/index.php/auth/login/entrar'
@@ -30,9 +34,6 @@ def main():
     form_data_login = {'u': PORTAL_USER, 'p': PORTAL_PW}
 
     USER_EMAIL = os.environ.get('USER_EMAIL', 'Email Not Set')  # For emails
-
-    # Data store
-    store = pickledb.load(PICKLE_FN, True)  # Grades store
 
     with requests.Session() as s:
         s.post(LOGIN_URL, data=form_data_login)
@@ -49,7 +50,7 @@ def main():
         })
 
     subjects = grades_res.json().get('data')
-    print(subjects)
+    print([f'{dic["DescMateria"]} - {dic["Cal"] or 0}' for dic in subjects])
     for subject in subjects:
         subject_id = subject.get('ClaveMateria')
         subject_grade = subject.get('Cal')
