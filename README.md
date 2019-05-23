@@ -45,7 +45,7 @@ $ crontab -e
 ```
 En la parte inferior (hasta abajo) escribe lo siguiente.
 ```bash
-*/10 * * * * sh /home/nifled/uni-grade-notifier/sample-script.sh
+*/10 * * * * sh /home/<TU_USERNAME>/uni-grade-notifier/sample-script.sh
  
 ```
 **Asegurate de dejar un salto de linea despues del comando.** 
